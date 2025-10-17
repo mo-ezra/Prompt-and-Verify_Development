@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Prompt-and-Verify Development (PaV)</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Prompt-and-Verify Development (PaV) is an AI-assisted software method where engineers generate code via prompts and then rigorously review, test, and edit outputs before acceptance." />
+  <link rel="canonical" href="https://<your-username>.github.io/prompt-and-verify-development/" />
+  <style>
+    :root { --fg:#111; --muted:#555; --bg:#fff; --accent:#2b67f6; --border:#eaeaea; }
+    body { font: 16px/1.6 system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji","Segoe UI Emoji"; color:var(--fg); background:var(--bg); margin:0; }
+    header { padding:56px 20px 24px; border-bottom:1px solid var(--border); }
+    main { max-width: 860px; margin: 0 auto; padding: 24px 20px 64px; }
+    h1 { font-size: 2.2rem; margin: 0 0 8px; }
+    h2 { margin-top: 2.2rem; font-size: 1.4rem; }
+    h3 { margin-top: 1.4rem; font-size: 1.1rem; }
+    p, li { color: var(--fg); }
+    .lede { color: var(--muted); margin-top: 6px; }
+    code, pre { background:#f6f8fa; border:1px solid #eee; border-radius:6px; }
+    code { padding: 2px 5px; }
+    pre { padding: 12px; overflow:auto; }
+    .pill { display:inline-block; background:#eef2ff; color:#233876; padding:2px 8px; border-radius:999px; font-weight:600; font-size:0.9rem; border:1px solid #dfe6ff; }
+    .cta { margin-top: 8px; }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    table { width:100%; border-collapse: collapse; margin: 12px 0; }
+    th, td { border:1px solid var(--border); padding:8px; text-align:left; }
+    .small { font-size: 0.95rem; }
+    footer { border-top:1px solid var(--border); padding:24px 20px; color:var(--muted); }
+    .kbd { border:1px solid #ccc; padding:1px 5px; border-radius:4px; background: #fafafa; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono","Courier New", monospace; }
+  </style>
+
+  <!-- JSON-LD: make this a recognized definition -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "DefinedTerm",
+    "name": "Prompt-and-Verify Development",
+    "alternateName": "PaV",
+    "termCode": "PaV",
+    "description": "An AI-assisted software development method where code is generated via prompts and then rigorously reviewed, tested, and edited before acceptance.",
+    "inDefinedTermSet": "https://<your-username>.github.io/prompt-and-verify-development/",
+    "sameAs": [
+      "https://github.com/<your-username>/prompt-and-verify-development"
+    ]
+  }
+  </script>
+</head>
+<body>
+  <header>
+    <main>
+      <span class="pill">PaV</span>
+      <h1>Prompt-and-Verify Development</h1>
+      <p class="lede">An AI-assisted software method where engineers use natural-language prompts to generate code and <strong>always</strong> pass it through human review, automated tests, and standards before acceptance.</p>
+      <p class="cta small">Canonical home: <a href="https://github.com/<your-username>/prompt-and-verify-development">GitHub repository</a></p>
+    </main>
+  </header>
+
+  <main>
+    <h2 id="definition">Definition</h2>
+    <p><strong>Prompt-and-Verify Development (PaV)</strong> is a disciplined workflow for AI-assisted coding: the AI drafts; the engineer <em>verifies</em> with code review, tests, linters, and security checks. If verification fails, the engineer revises prompts or hand-edits until it passes. Nothing merges without verification.</p>
+
+    <h2 id="why-not-vibe-coding">How PaV differs from “vibe coding”</h2>
+    <table>
+      <thead><tr><th>Aspect</th><th>Vibe coding</th><th>PaV</th></tr></thead>
+      <tbody>
+        <tr><td>Review depth</td><td>Minimal / opportunistic</td><td><strong>Mandatory, deep</strong></td></tr>
+        <tr><td>Quality gates</td><td>May skip or defer</td><td><strong>Tests, lint, security, CI</strong> required</td></tr>
+        <tr><td>Risk posture</td><td>Prototype-first</td><td><strong>Reliability-first</strong></td></tr>
+        <tr><td>Suitable for</td><td>Fast prototyping</td><td><strong>Production & regulated teams</strong></td></tr>
+      </tbody>
+    </table>
+
+    <h2 id="principles">Core principles</h2>
+    <ol>
+      <li><strong>Single source of truth</strong>: specs & tests define correctness.</li>
+      <li><strong>Human accountability</strong>: engineers own merges and outcomes.</li>
+      <li><strong>Tooling neutrality</strong>: PaV works with any LLM or IDE.</li>
+      <li><strong>Defense in depth</strong>: static analysis, SCA, secrets scan, SAST/DAST where relevant.</li>
+      <li><strong>Repeatable prompts</strong>: prompts live with code (docs or repo).</li>
+    </ol>
+
+    <h2 id="workflow">Reference workflow</h2>
+    <ol>
+      <li><strong>Frame</strong>: write/attach a brief spec or tests first.</li>
+      <li><strong>Prompt</strong>: ask the LLM for code changes (scoped, testable).</li>
+      <li><strong>Build locally</strong>: run unit tests, lints, type checks.</li>
+      <li><strong>Review</strong>: human code review → request fixes or edit.</li>
+      <li><strong>Gate</strong>: CI must pass verification checks before merge.</li>
+      <li><strong>Document</strong>: commit prompt & decisions (ADR/changelog).</li>
+    </ol>
+
+    <h2 id="prompt-examples">Prompt examples</h2>
+    <pre><code>Implement a pure function `normalizePhone(input: string): string`:
+- E.164 format; keep leading '+'; strip spaces/dashes; validate country code.
+- Add tests for US/UK/NG valid and invalid inputs.
+- Do not add dependencies. Keep under 60 lines.
+- Existing stack: TypeScript + Vitest. Place tests in tests/normalizePhone.test.ts.</code></pre>
+
+    <pre><code>Refactor `UserRepo.save()` to be idempotent:
+- If a row exists with same email, update instead of insert.
+- Add migration script and integration tests.
+- Postgres 15, Node.js Prisma ORM.
+- Ensure transactions and rollback on failure.</code></pre>
+
+    <h2 id="implementation-checklist">Implementation checklist</h2>
+    <ul>
+      <li>Repo contains <code>CONTRIBUTING.md</code> describing PaV gates.</li>
+      <li>CI enforces: tests, lints, type-check, coverage threshold, security scans.</li>
+      <li>Prompts stored under <code>docs/prompts/</code> or in PR description.</li>
+      <li>ADR for notable AI-assisted design decisions.</li>
+    </ul>
+
+    <h2 id="ci-sample">Minimal GitHub Actions (Node example)</h2>
+    <p class="small">Copy and adapt to your stack.</p>
+    <pre><code># .github/workflows/pav.yml
+name: PaV Gates
+on:
+  pull_request:
+    branches: [ main ]
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: '20' }
+      - run: npm ci
+      - run: npm run lint
+      - run: npm run typecheck --if-present
+      - run: npm test -- --ci --reporters=default --coverage
+      - name: Block if coverage & audits fail
+        run: |
+          npm run coverage:check || exit 1
+          npm audit --audit-level=high || true
+      - name: Secret scan
+        uses: trufflesecurity/trufflehog@v3
+        with:
+          path: .
+          base: ${{ github.event.pull_request.base.sha }}
+          head: ${{ github.event.pull_request.head.sha }}</code></pre>
+
+    <h2 id="faq">FAQ</h2>
+    <h3>What problems does PaV solve?</h3>
+    <p>It enables speed from LLMs without sacrificing reliability, security, or maintainability—by making verification non-negotiable.</p>
+
+    <h3>Is PaV tool- or vendor-specific?</h3>
+    <p>No. It’s a process. Use any LLM, editor, or CI as long as verification gates are enforced.</p>
+
+    <h3>Can PaV work in regulated environments?</h3>
+    <p>Yes—PaV maps well to existing controls (peer review, test evidence, SoD). Keep prompt history and decisions in the repo for auditability.</p>
+
+    <h3>How do I start?</h3>
+    <ol>
+      <li>Adopt the CI gates above.</li>
+      <li>Add a <code>CONTRIBUTING.md</code> with PaV rules.</li>
+      <li>Store prompts with the code or PR.</li>
+      <li>Pilot on a small service; iterate.</li>
+    </ol>
+
+    <h3>Is PaV only for “fixes” or also for net-new code?</h3>
+    <p>Both. The key is always the same: code is accepted only after verification passes.</p>
+
+    <h2 id="credits">Attribution & license</h2>
+    <p>Proposed and maintained by <a href="https://github.com/<your-username>">@<your-username></a>. Content licensed under <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>. Please link back to this page when referencing the term.</p>
+
+    <h2 id="changelog">Changelog</h2>
+    <ul>
+      <li><strong>v1.0</strong> — Initial definition, workflow, CI sample, FAQ.</li>
+    </ul>
+  </main>
+
+  <footer>
+    <div>© <span id="y"></span> Prompt-and-Verify Development (PaV) • <a href="#definition">Definition</a> • <a href="#workflow">Workflow</a> • <a href="#faq">FAQ</a></div>
+  </footer>
+  <script>document.getElementById('y').textContent = new Date().getFullYear();</script>
+</body>
+</html>
+
