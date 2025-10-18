@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://mo-ezra.github.io/Prompt-and-Verify_Development/sitemap.xml
