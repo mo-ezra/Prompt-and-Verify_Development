@@ -103,43 +103,6 @@
 - Postgres 15, Node.js Prisma ORM.
 - Ensure transactions and rollback on failure.</code></pre>
 
-    <h2 id="implementation-checklist">Implementation checklist</h2>
-    <ul>
-      <li>Repo contains <code>CONTRIBUTING.md</code> describing PaV gates.</li>
-      <li>CI enforces: tests, lints, type-check, coverage threshold, security scans.</li>
-      <li>Prompts stored under <code>docs/prompts/</code> or in PR description.</li>
-      <li>ADR for notable AI-assisted design decisions.</li>
-    </ul>
-
-    <h2 id="ci-sample">Minimal GitHub Actions (Node example)</h2>
-    <p class="small">Copy and adapt to your stack.</p>
-    <pre><code># .github/workflows/pav.yml
-name: PaV Gates
-on:
-  pull_request:
-    branches: [ main ]
-jobs:
-  verify:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with: { node-version: '20' }
-      - run: npm ci
-      - run: npm run lint
-      - run: npm run typecheck --if-present
-      - run: npm test -- --ci --reporters=default --coverage
-      - name: Block if coverage & audits fail
-        run: |
-          npm run coverage:check || exit 1
-          npm audit --audit-level=high || true
-      - name: Secret scan
-        uses: trufflesecurity/trufflehog@v3
-        with:
-          path: .
-          base: ${{ github.event.pull_request.base.sha }}
-          head: ${{ github.event.pull_request.head.sha }}</code></pre>
-
     <h2 id="faq">FAQ</h2>
     <h3>What problems does PaV solve?</h3>
     <p>It enables speed from LLMs without sacrificing reliability, security, or maintainability—by making verification non-negotiable.</p>
@@ -150,28 +113,10 @@ jobs:
     <h3>Can PaV work in regulated environments?</h3>
     <p>Yes—PaV maps well to existing controls (peer review, test evidence, SoD). Keep prompt history and decisions in the repo for auditability.</p>
 
-    <h3>How do I start?</h3>
-    <ol>
-      <li>Adopt the CI gates above.</li>
-      <li>Add a <code>CONTRIBUTING.md</code> with PaV rules.</li>
-      <li>Store prompts with the code or PR.</li>
-      <li>Pilot on a small service; iterate.</li>
-    </ol>
-
-    <h3>Is PaV only for “fixes” or also for net-new code?</h3>
-    <p>Both. The key is always the same: code is accepted only after verification passes.</p>
-
-    <h2 id="credits">Attribution & license</h2>
-    <p>Proposed and maintained by <a href="https://github.com/<your-username>">@<your-username></a>. Content licensed under <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>. Please link back to this page when referencing the term.</p>
-
-    <h2 id="changelog">Changelog</h2>
-    <ul>
-      <li><strong>v1.0</strong> — Initial definition, workflow, CI sample, FAQ.</li>
-    </ul>
   </main>
 
   <footer>
-    <div>© <span id="y"></span> Prompt-and-Verify Development (PaV) • <a href="#definition">Definition</a> • <a href="#workflow">Workflow</a> • <a href="#faq">FAQ</a></div>
+    <div>© <span id="y"></span> Prompt-and-Verify Development (PaV)
   </footer>
   <script>document.getElementById('y').textContent = new Date().getFullYear();</script>
 </body>
