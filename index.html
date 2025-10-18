@@ -52,7 +52,6 @@
       <span class="pill">PaV</span>
       <h1>Prompt-and-Verify Development</h1>
       <p class="lede">An AI-assisted software method where engineers use natural-language prompts to generate code and <strong>always</strong> pass it through human review, automated tests, and standards before acceptance.</p>
-      <p class="cta small">Canonical home: <a href="https://github.com/<your-username>/prompt-and-verify-development">GitHub repository</a></p>
     </main>
   </header>
 
@@ -60,16 +59,7 @@
     <h2 id="definition">Definition</h2>
     <p><strong>Prompt-and-Verify Development (PaV)</strong> is a disciplined workflow for AI-assisted coding: the AI drafts; the engineer <em>verifies</em> with code review, tests, linters, and security checks. If verification fails, the engineer revises prompts or hand-edits until it passes. Nothing merges without verification.</p>
 
-    <h2 id="why-not-vibe-coding">How PaV differs from “vibe coding”</h2>
-    <table>
-      <thead><tr><th>Aspect</th><th>Vibe coding</th><th>PaV</th></tr></thead>
-      <tbody>
-        <tr><td>Review depth</td><td>Minimal / opportunistic</td><td><strong>Mandatory, deep</strong></td></tr>
-        <tr><td>Quality gates</td><td>May skip or defer</td><td><strong>Tests, lint, security, CI</strong> required</td></tr>
-        <tr><td>Risk posture</td><td>Prototype-first</td><td><strong>Reliability-first</strong></td></tr>
-        <tr><td>Suitable for</td><td>Fast prototyping</td><td><strong>Production & regulated teams</strong></td></tr>
-      </tbody>
-    </table>
+    
 
     <h2 id="principles">Core principles</h2>
     <ol>
@@ -112,6 +102,17 @@
 
     <h3>Can PaV work in regulated environments?</h3>
     <p>Yes—PaV maps well to existing controls (peer review, test evidence, SoD). Keep prompt history and decisions in the repo for auditability.</p>
+
+    <h3 id="why-not-vibe-coding">How PaV differs from “vibe coding”</h3>
+    <table>
+      <thead><tr><th>Aspect</th><th>Vibe coding</th><th>PaV</th></tr></thead>
+      <tbody>
+        <tr><td>Review depth</td><td>Minimal / opportunistic</td><td><strong>Mandatory, deep</strong></td></tr>
+        <tr><td>Quality gates</td><td>May skip or defer</td><td><strong>Tests, lint, security, CI</strong> required</td></tr>
+        <tr><td>Risk posture</td><td>Prototype-first</td><td><strong>Reliability-first</strong></td></tr>
+        <tr><td>Suitable for</td><td>Fast prototyping</td><td><strong>Production & regulated teams</strong></td></tr>
+      </tbody>
+    </table>
 
   </main>
 
